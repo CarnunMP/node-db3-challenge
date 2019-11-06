@@ -6,6 +6,7 @@ module.exports = {
   findSteps,
   add,
   update,
+  remove,
 }
 
 function find() {
@@ -47,4 +48,10 @@ function update(changes, id) {
       return findById(id);
     });
     // How to write a .catch() to throw an error if there's an SQL exception?
+}
+
+function remove(id) {
+  return db('schemes')
+    .where({ id })
+    .del();
 }
