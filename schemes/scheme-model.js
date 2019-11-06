@@ -41,9 +41,10 @@ function add(scheme) {
 
 function update(changes, id) {
   return db('schemes')
-    .where({ id: id })
+    .where({ id }) // Why does this work?!
     .update(changes)
-    .then(ids => {
-      return findById(ids[0]);
+    .then(count => {
+      return findById(id);
     });
+    // How to write a .catch() to throw an error if there's an SQL exception?
 }
