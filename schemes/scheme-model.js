@@ -1,1 +1,10 @@
-const db = require('../data/')
+const db = require('../data/db-config');
+
+module.exports = {
+  find,
+}
+
+function find() {
+  return db('schemes AS s')
+    .select('s.scheme_name');
+}
