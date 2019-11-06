@@ -4,6 +4,7 @@ module.exports = {
   find,
   findById,
   findSteps,
+  add,
 }
 
 function find() {
@@ -29,3 +30,12 @@ function findSteps(id) {
     .where({ 'st.scheme_id': id });
     // Does it matter if ^this is as-is or _'sc.id': id_?
 }
+
+function add(scheme) {
+  db('schemes').insert(scheme)
+    .then(ids => {
+      return findById(ids[0]);
+    });
+}
+// ^This doesn't seem to be working. Any ideas? I'm tearing my hair out, ha.
+// (Specifically: it doesn't seem to be returning a promise as it should...)
