@@ -5,6 +5,7 @@ module.exports = {
   findById,
   findSteps,
   add,
+  update,
 }
 
 function find() {
@@ -32,10 +33,17 @@ function findSteps(id) {
 }
 
 function add(scheme) {
-  db('schemes').insert(scheme)
+  return db('schemes').insert(scheme)
     .then(ids => {
       return findById(ids[0]);
     });
 }
-// ^This doesn't seem to be working. Any ideas? I'm tearing my hair out, ha.
-// (Specifically: it doesn't seem to be returning a promise as it should...)
+
+function update(changes, id) {
+  return db('schemes')
+    .where({ id: id })
+    .update(changes)
+    .then(ids => {
+      return findById(ids[0]);
+    });
+}
